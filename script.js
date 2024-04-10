@@ -4,7 +4,7 @@ class Calculadora {
         this.ligada = false;
         this.nrVisor = '';
         this.ptDecimal = false;
-        this.estadoErro = false;
+        this.estadoErro = true;
         this.memTemp = '';
         this.memoria = 0;
         this.iniciouSegundo = false;
@@ -16,6 +16,7 @@ class Calculadora {
             DIV: 4
         };
         this.opAtual = this.op.NOP;
+        //this.nrVisor = String(resultado).slice(0, 10);
     }
 
     // Retorna valor do visor
@@ -100,12 +101,17 @@ class Calculadora {
 
     // Tecla C - reinicia tudo, exceto memória
     teclaC() {
-        this.nrVisor = '0';
-        this.ptDecimal = false;
-        this.iniciouSegundo = false;
-        this.opAtual = this.op.NOP;
-        this.memTemp = '';
-        this.estadoErro = false;
+        if(!this.ligada){
+            
+        }else{
+            this.nrVisor = '0';
+            this.ptDecimal = false;
+            this.iniciouSegundo = false;
+            this.opAtual = this.op.NOP;
+            this.memTemp = '';
+            this.estadoErro = false;
+        }
+        
     }
 
     // tecla M+ : acrescenta à memória o número no visor
@@ -131,16 +137,13 @@ class Calculadora {
         if (this.estadoErro) return;
         this.memoria = 0;
     }
-}
 
-    //ELA VAI COMECAR DESLIGADA
-    function onOf(){
-        console.log("TESTE");
+    onOf(){
         if(this.ligada){
             //implementar logica para desligar
             this.nrVisor = '';
             this.ptDecimal = false;
-            this.estadoErro = false;
+            this.estadoErro = true;
             this.memTemp = '';
             this.memoria = 0;
             this.iniciouSegundo = false;
@@ -172,10 +175,16 @@ class Calculadora {
             //implementar logica para ligar
             this.ligada=true;
         }
-        console.log("VALOR NRVISOR", this.nrVisor)
-        mostraVisor();
-        console.log("LIGADA ", this.ligada)
     }
+}
+
+    //ELA VAI COMECAR DESLIGADA
+let onOf = () =>{
+    console.log("ahhhhh")
+    calculadora.onOf();
+    mostraVisor();
+    console.log("LIGADA ", this.ligada)
+}
 
 // ===================================================================
 //  REAÇÃO A EVENTOS DO MOUSE
