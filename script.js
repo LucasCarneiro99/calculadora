@@ -21,6 +21,7 @@ class Calculadora {
 
     // Retorna valor do visor
     mostraVisor() {
+        
         return this.nrVisor;
     }
 
@@ -138,6 +139,12 @@ class Calculadora {
         this.memoria = 0;
     }
 
+    // tecla 1/x : inverve o valor mostrado na tela
+    teclaInverte(){
+        if (this.estadoErro) return;
+        this.nrVisor = 1/parseFloat(this.nrVisor);
+    }
+
     onOf(){
         if(this.ligada){
             //implementar logica para desligar
@@ -176,11 +183,11 @@ class Calculadora {
             this.ligada=true;
         }
     }
+    
 }
 
     //ELA VAI COMECAR DESLIGADA
 let onOf = () =>{
-    console.log("ahhhhh")
     calculadora.onOf();
     mostraVisor();
     console.log("LIGADA ", this.ligada)
@@ -192,7 +199,7 @@ let onOf = () =>{
 
 // ATUALIZA O VALOR NO VISOR
 let mostraVisor = () => {
-    console.log("NR VISOR" , this.nrVisor)
+    console.log("NR VISOR" , calculadora.nrVisor)
     document.getElementById('visor-id').innerHTML = calculadora.nrVisor;
 }
 
@@ -233,11 +240,19 @@ let teclaMmenos = () => {
     calculadora.teclaMmenos();
 }
 
+// 1/x INVERTE O VALOR ATUAL NO VISOR
+let teclaInverte = () => {
+    calculadora.teclaInverte();
+    mostraVisor();
+}
+
 // PÕE NO VISOR O CONTEÚDO DA MEMÓRIA
 let teclaRM = () => {
     calculadora.teclaRM();
     mostraVisor();
 }
+
+
 
 // APAGA TODO O CONTEÚDO DA MEMÓRIA
 let teclaCLM = () => {
