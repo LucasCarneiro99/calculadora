@@ -101,9 +101,9 @@ class Calculadora {
 
     // Tecla C - reinicia tudo, exceto memória
     teclaC() {
-        if(!this.ligada){
-            
-        }else{
+        if (!this.ligada) {
+            return;
+        } else {
             this.nrVisor = '0';
             this.ptDecimal = false;
             this.iniciouSegundo = false;
@@ -111,7 +111,7 @@ class Calculadora {
             this.memTemp = '';
             this.estadoErro = false;
         }
-        
+
     }
 
     // tecla M+ : acrescenta à memória o número no visor
@@ -138,8 +138,8 @@ class Calculadora {
         this.memoria = 0;
     }
 
-    onOf(){
-        if(this.ligada){
+    onOf() {
+        if (this.ligada) {
             //implementar logica para desligar
             this.nrVisor = '';
             this.ptDecimal = false;
@@ -156,8 +156,8 @@ class Calculadora {
             };
             this.opAtual = this.op.NOP;
 
-            this.ligada=false;
-        }else{
+            this.ligada = false;
+        } else {
             this.nrVisor = '0';
             this.ptDecimal = false;
             this.estadoErro = false;
@@ -173,13 +173,13 @@ class Calculadora {
             };
             this.opAtual = this.op.NOP;
             //implementar logica para ligar
-            this.ligada=true;
+            this.ligada = true;
         }
     }
 }
 
-    //ELA VAI COMECAR DESLIGADA
-let onOf = () =>{
+//ELA VAI COMECAR DESLIGADA
+let onOf = () => {
     console.log("ahhhhh")
     calculadora.onOf();
     mostraVisor();
@@ -192,7 +192,7 @@ let onOf = () =>{
 
 // ATUALIZA O VALOR NO VISOR
 let mostraVisor = () => {
-    console.log("NR VISOR" , this.nrVisor)
+    console.log("NR VISOR", this.nrVisor)
     document.getElementById('visor-id').innerHTML = calculadora.nrVisor;
 }
 
