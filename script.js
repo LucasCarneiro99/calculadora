@@ -13,7 +13,8 @@ class Calculadora {
             SUM: 1,
             SUB: 2,
             MULT: 3,
-            DIV: 4
+            DIV: 4,
+            PERC: 5,
         };
         this.opAtual = this.op.NOP;
         //this.nrVisor = String(resultado).slice(0, 10);
@@ -63,6 +64,9 @@ class Calculadora {
             case '*':
                 this.opAtual = this.op.MULT;
                 break;
+            case '%':
+                this.opAtual = this.op.PERC;
+            break;
         }
         this.memTemp = this.nrVisor;
     }
@@ -92,6 +96,9 @@ class Calculadora {
                 }
                 resultado = num1 / num2;
                 break;
+            case this.op.PERC:
+                resultado = (num1*num2)/100;
+                break
         }
         this.opAtual = this.op.NOP;
         this.ptDecimal = false;
@@ -145,6 +152,23 @@ class Calculadora {
         this.nrVisor = 1/parseFloat(this.nrVisor);
     }
 
+    teclaInverteSinal(){
+        if (this.estadoErro) return;
+        this.nrVisor = -this.nrVisor;
+    }
+
+    // tecla √: mostra a raiz quadrada do numero mostrado no visor.
+    teclaRaizQuadrada(){
+        if (this.estadoErro) return;
+        this.nrVisor = Math.sqrt(this.nrVisor);
+    }
+
+    // tecla x^2: mostra o quadrado do numero mostrado no visor.
+    teclaAoQuadrado(){
+        if (this.estadoErro) return;
+        this.nrVisor = Math.pow(this.nrVisor,2);
+    }
+
     onOf(){
         if(this.ligada){
             //implementar logica para desligar
@@ -159,7 +183,8 @@ class Calculadora {
                 SUM: 1,
                 SUB: 2,
                 MULT: 3,
-                DIV: 4
+                DIV: 4,
+                PERC: 5
             };
             this.opAtual = this.op.NOP;
 
@@ -176,7 +201,8 @@ class Calculadora {
                 SUM: 1,
                 SUB: 2,
                 MULT: 3,
-                DIV: 4
+                DIV: 4,
+                PERC: 5
             };
             this.opAtual = this.op.NOP;
             //implementar logica para ligar
@@ -246,9 +272,32 @@ let teclaInverte = () => {
     mostraVisor();
 }
 
+// +/- INVERTE O SINAL ATUAL NO VISOR
+let teclaInverteSinal = () => {
+    calculadora.teclaInverteSinal();
+    mostraVisor();
+}
+
+// √ MOSTRA A RAIZ QUADRADA DO NUMERO EM QUESTÃO
+let teclaRaizQuadrada = () => {
+    calculadora.teclaRaizQuadrada();
+    mostraVisor();
+}
+
+// x^2 MOSTRA O NUMERO AO QUADRADO EM QUESTÃO
+let teclaAoQuadrado = () => {
+    calculadora.teclaAoQuadrado();
+    mostraVisor();
+}
+
 // PÕE NO VISOR O CONTEÚDO DA MEMÓRIA
 let teclaRM = () => {
     calculadora.teclaRM();
+    mostraVisor();
+}
+
+let teclaPorcentagem = () => {
+    calculadora.teclaPorcentagem();
     mostraVisor();
 }
 
