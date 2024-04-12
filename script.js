@@ -222,7 +222,8 @@ let onOf = () =>{
 // ===================================================================
 
 // ATUALIZA O VALOR NO VISOR
-    console.log("NR VISOR" , calculadora.nrVisor)
+let mostraVisor = () => {
+    console.log("NR VISOR" , calculadora.nrVisor);
     document.getElementById('visor-id').innerHTML = calculadora.nrVisor;
 }
 
@@ -310,9 +311,6 @@ let teclaCLM = () => {
 // ===================================================================
 //  INÍCIO DO PROCESSAMENTO
 // ===================================================================
-
-
-
 
 let calculadora = new Calculadora();
 
