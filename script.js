@@ -13,7 +13,8 @@ class Calculadora {
             SUM: 1,
             SUB: 2,
             MULT: 3,
-            DIV: 4
+            DIV: 4,
+            PERC: 5,
         };
         this.opAtual = this.op.NOP;
         //this.nrVisor = String(resultado).slice(0, 10);
@@ -21,6 +22,7 @@ class Calculadora {
 
     // Retorna valor do visor
     mostraVisor() {
+        
         return this.nrVisor;
     }
 
@@ -62,6 +64,9 @@ class Calculadora {
             case '*':
                 this.opAtual = this.op.MULT;
                 break;
+            case '%':
+                this.opAtual = this.op.PERC;
+            break;
         }
         this.memTemp = this.nrVisor;
     }
@@ -91,6 +96,9 @@ class Calculadora {
                 }
                 resultado = num1 / num2;
                 break;
+            case this.op.PERC:
+                resultado = (num1*num2)/100;
+                break
         }
         this.opAtual = this.op.NOP;
         this.ptDecimal = false;
@@ -137,9 +145,31 @@ class Calculadora {
         if (this.estadoErro) return;
         this.memoria = 0;
     }
+    // tecla 1/x : inverve o valor mostrado na tela
+    teclaInverte(){
+        if (this.estadoErro) return;
+        this.nrVisor = 1/parseFloat(this.nrVisor);
+    }
 
-    onOf() {
-        if (this.ligada) {
+    teclaInverteSinal(){
+        if (this.estadoErro) return;
+        this.nrVisor = -this.nrVisor;
+    }
+
+    // tecla √: mostra a raiz quadrada do numero mostrado no visor.
+    teclaRaizQuadrada(){
+        if (this.estadoErro) return;
+        this.nrVisor = Math.sqrt(this.nrVisor);
+    }
+
+    // tecla x^2: mostra o quadrado do numero mostrado no visor.
+    teclaAoQuadrado(){
+        if (this.estadoErro) return;
+        this.nrVisor = Math.pow(this.nrVisor,2);
+    }
+
+    onOf(){
+        if(this.ligada){
             //implementar logica para desligar
             this.nrVisor = '';
             this.ptDecimal = false;
@@ -152,7 +182,8 @@ class Calculadora {
                 SUM: 1,
                 SUB: 2,
                 MULT: 3,
-                DIV: 4
+                DIV: 4,
+                PERC: 5
             };
             this.opAtual = this.op.NOP;
 
@@ -169,18 +200,18 @@ class Calculadora {
                 SUM: 1,
                 SUB: 2,
                 MULT: 3,
-                DIV: 4
+                DIV: 4,
+                PERC: 5
             };
             this.opAtual = this.op.NOP;
             //implementar logica para ligar
             this.ligada = true;
         }
     }
+    
 }
-
-//ELA VAI COMECAR DESLIGADA
-let onOf = () => {
-    console.log("ahhhhh")
+    //ELA VAI COMECAR DESLIGADA
+let onOf = () =>{
     calculadora.onOf();
     mostraVisor();
     console.log("LIGADA ", this.ligada)
@@ -191,8 +222,7 @@ let onOf = () => {
 // ===================================================================
 
 // ATUALIZA O VALOR NO VISOR
-let mostraVisor = () => {
-    console.log("NR VISOR", this.nrVisor)
+    console.log("NR VISOR" , calculadora.nrVisor)
     document.getElementById('visor-id').innerHTML = calculadora.nrVisor;
 }
 
@@ -233,11 +263,42 @@ let teclaMmenos = () => {
     calculadora.teclaMmenos();
 }
 
+// 1/x INVERTE O VALOR ATUAL NO VISOR
+let teclaInverte = () => {
+    calculadora.teclaInverte();
+    mostraVisor();
+}
+
+// +/- INVERTE O SINAL ATUAL NO VISOR
+let teclaInverteSinal = () => {
+    calculadora.teclaInverteSinal();
+    mostraVisor();
+}
+
+// √ MOSTRA A RAIZ QUADRADA DO NUMERO EM QUESTÃO
+let teclaRaizQuadrada = () => {
+    calculadora.teclaRaizQuadrada();
+    mostraVisor();
+}
+
+// x^2 MOSTRA O NUMERO AO QUADRADO EM QUESTÃO
+let teclaAoQuadrado = () => {
+    calculadora.teclaAoQuadrado();
+    mostraVisor();
+}
+
 // PÕE NO VISOR O CONTEÚDO DA MEMÓRIA
 let teclaRM = () => {
     calculadora.teclaRM();
     mostraVisor();
 }
+
+let teclaPorcentagem = () => {
+    calculadora.teclaPorcentagem();
+    mostraVisor();
+}
+
+
 
 // APAGA TODO O CONTEÚDO DA MEMÓRIA
 let teclaCLM = () => {
