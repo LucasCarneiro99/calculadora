@@ -22,7 +22,6 @@ class Calculadora {
 
     // Retorna valor do visor
     mostraVisor() {
-        
         return this.nrVisor;
     }
 
@@ -104,7 +103,7 @@ class Calculadora {
         this.ptDecimal = false;
         this.memTemp = '';
         this.iniciouSegundo = false;
-        this.nrVisor = String(resultado).slice(0, 10);
+        this.nrVisor = String(resultado).substring(0,10);
     }
 
     // Tecla C - reinicia tudo, exceto memória
@@ -159,13 +158,13 @@ class Calculadora {
     // tecla √: mostra a raiz quadrada do numero mostrado no visor.
     teclaRaizQuadrada(){
         if (this.estadoErro) return;
-        this.nrVisor = Math.sqrt(this.nrVisor);
+        this.nrVisor = Math.sqrt(this.nrVisor).toString().substring(0,10);
     }
 
     // tecla x^2: mostra o quadrado do numero mostrado no visor.
     teclaAoQuadrado(){
         if (this.estadoErro) return;
-        this.nrVisor = Math.pow(this.nrVisor,2);
+        this.nrVisor = Math.pow(this.nrVisor,2).toString().substring(0,10);
     }
 
     onOf(){
