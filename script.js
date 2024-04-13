@@ -164,7 +164,13 @@ class Calculadora {
     // tecla x^2: mostra o quadrado do numero mostrado no visor.
     teclaAoQuadrado(){
         if (this.estadoErro) return;
-        this.nrVisor = Math.pow(this.nrVisor,2).toString().substring(0,10);
+        const nrVisor = parseFloat(this.nrVisor);
+        const result = nrVisor ** 2; 
+        const resultString = result.toString();
+        const resultLength = resultString.length; 
+        const resultTruncated = resultString.substring(0, 10);
+        const resultFormatted = resultLength > 10 ? `${resultTruncated}...` : resultTruncated;
+        this.nrVisor = resultFormatted;
     }
 
     onOf(){
